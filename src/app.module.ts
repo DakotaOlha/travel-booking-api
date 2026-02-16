@@ -12,6 +12,8 @@ import { BookingsModule } from './bookings/bookings.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true, }), PrismaModule, AuthModule, UsersModule, TravelsModule, HotelsModule, RoomsModule, BookingsModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 
 export class AppModule { }
