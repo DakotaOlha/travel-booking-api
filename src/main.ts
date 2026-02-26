@@ -6,7 +6,6 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Глобальна валідація
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -15,24 +14,22 @@ async function bootstrap() {
     }),
   );
 
-  // CORS
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:4200'], // Додайте свої домени
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'http://localhost:5173'],
     credentials: true,
   });
 
-  // Swagger документація
   const config = new DocumentBuilder()
     .setTitle('Travel Booking API')
-    .setDescription('API для управління подорожами та бронюванням готелів')
+    .setDescription('API for managing travel and hotel bookings')
     .setVersion('1.0')
     .addBearerAuth()
-    .addTag('Auth', 'Автентифікація та реєстрація')
-    .addTag('Users', 'Управління користувачами')
-    .addTag('Hotels', 'Управління готелями')
-    .addTag('Rooms', 'Управління кімнатами')
-    .addTag('Travels', 'Управління подорожами')
-    .addTag('Bookings', 'Управління бронюваннями')
+    .addTag('Auth', 'Authentication and registration')
+    .addTag('Users', 'User management')
+    .addTag('Hotels', 'Hotel management')
+    .addTag('Rooms', 'Room management')
+    .addTag('Travels', 'Travel management')
+    .addTag('Bookings', 'Booking management')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -41,8 +38,8 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   await app.listen(port);
 
-  console.log(`\n🚀 Сервер запущено на http://localhost:${port}`);
-  console.log(`📚 Swagger документація: http://localhost:${port}/api/docs\n`);
+  console.log(`\nServer started on http://localhost:${port}`);
+  console.log(`Swagger documentation: http://localhost:${port}/api/docs\n`);
 }
 
 bootstrap();

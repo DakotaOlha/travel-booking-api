@@ -15,7 +15,7 @@ export class CreateBookingDto {
     @Min(1)
     guestsCount: number;
 
-    @ApiPropertyOptional({ example: 'Потрібен високий поверх' })
+    @ApiPropertyOptional({ example: 'Need a high floor' })
     @IsOptional()
     @IsString()
     specialRequests?: string;

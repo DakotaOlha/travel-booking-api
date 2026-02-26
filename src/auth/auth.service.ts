@@ -15,7 +15,7 @@ export class AuthService {
         const user = await this.usersService.findByEmail(loginDto.email);
 
         if (!user) {
-            throw new UnauthorizedException('Невірний email або пароль');
+            throw new UnauthorizedException('Invalid email or password');
         }
 
         const isPasswordValid = await bcrypt.compare(
@@ -24,7 +24,7 @@ export class AuthService {
         );
 
         if (!isPasswordValid) {
-            throw new UnauthorizedException('Невірний email або пароль');
+            throw new UnauthorizedException('Invalid email or password');
         }
 
         const payload = { email: user.email, sub: user.id };

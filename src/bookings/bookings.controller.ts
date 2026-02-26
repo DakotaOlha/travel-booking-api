@@ -23,31 +23,31 @@ export class BookingsController {
     constructor(private readonly bookingsService: BookingsService) { }
 
     @Post()
-    @ApiOperation({ summary: 'Створити нове бронювання' })
+    @ApiOperation({ summary: 'Create a new booking' })
     create(@Request() req, @Body() createBookingDto: CreateBookingDto) {
         return this.bookingsService.create(req.user.id, createBookingDto);
     }
 
     @Get()
-    @ApiOperation({ summary: 'Отримати всі бронювання користувача' })
+    @ApiOperation({ summary: 'Get all user bookings' })
     findAll(@Request() req) {
         return this.bookingsService.findAll(req.user.id);
     }
 
     @Get('report')
-    @ApiOperation({ summary: 'Генерація звітів по запитах на бронювання' })
+    @ApiOperation({ summary: 'Generate booking request reports' })
     generateReport(@Request() req) {
         return this.bookingsService.generateBookingReport(req.user.id);
     }
 
     @Get(':id')
-    @ApiOperation({ summary: 'Отримати бронювання за ID' })
+    @ApiOperation({ summary: 'Get booking by ID' })
     findOne(@Param('id') id: string, @Request() req) {
         return this.bookingsService.findOne(id, req.user.id);
     }
 
     @Patch(':id')
-    @ApiOperation({ summary: 'Оновити інформацію про бронювання' })
+    @ApiOperation({ summary: 'Update booking information' })
     update(
         @Param('id') id: string,
         @Request() req,
@@ -57,7 +57,7 @@ export class BookingsController {
     }
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Видалити бронювання' })
+    @ApiOperation({ summary: 'Delete booking' })
     remove(@Param('id') id: string, @Request() req) {
         return this.bookingsService.remove(id, req.user.id);
     }

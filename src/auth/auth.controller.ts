@@ -14,17 +14,17 @@ export class AuthController {
     ) { }
 
     @Post('register')
-    @ApiOperation({ summary: 'Реєстрація нового користувача' })
+    @ApiOperation({ summary: 'Registration of a new user' })
     async register(@Body() createUserDto: CreateUserDto) {
         const user = await this.usersService.create(createUserDto);
         return {
-            message: 'Користувача успішно зареєстровано',
+            message: 'User successfully registered',
             user,
         };
     }
 
     @Post('login')
-    @ApiOperation({ summary: 'Авторизація користувача' })
+    @ApiOperation({ summary: 'User authorization' })
     login(@Body() loginDto: LoginDto) {
         return this.authService.login(loginDto);
     }
